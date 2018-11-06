@@ -1,6 +1,6 @@
 # TIL (Today I Learned)
 
-## 왜 하지?
+<!-- ## 왜 하지?
 
 > **인생 회고**를 하기 위한 **인생 로깅**
 
@@ -25,4 +25,4 @@
 
 ## 어떻게 기록하지?
 
-(가능하다면 매일) Markdown 파일로 작성하여 GitHub Repository에 Push한다.
+(가능하다면 매일) Markdown 파일로 작성하여 GitHub Repository에 Push한다. -->
