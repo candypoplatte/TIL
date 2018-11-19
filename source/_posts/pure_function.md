@@ -1,5 +1,5 @@
 ---
-title: 순수 함수 (Pure Function)
+title: 순수 함수 (Pure Function), 부수 효과 (Side Effect)
 date: 2018-11-17
 categories:
   - development
