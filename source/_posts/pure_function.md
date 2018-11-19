@@ -27,4 +27,4 @@ categories:
 ## Link
 
 - [순수함수@Wikipedia](https://en.wikipedia.org/wiki/Pure_function)
-- [부수효과@Wikipedia](https://en.wikipedia.org/wiki/Side_effect_(computer_science))
+- [부수효과@Wikipedia](https://en.wikipedia.org/wiki/Side_effect_\(computer_science\))

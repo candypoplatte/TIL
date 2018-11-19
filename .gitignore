@@ -10,3 +10,4 @@ package.json
 scaffolds/
 themes/
 yarn.lock
+.deploy_git/
