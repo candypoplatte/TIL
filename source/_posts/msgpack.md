@@ -9,6 +9,8 @@ Binary Serialization Format. 데이터를 바이너리 형태로 직렬화한다
 
 Redis와 Fluentd의 메시지 포맷으로 사용된다.
 
+## JSON VS MessagePack
+
 <img src="/TIL/images/msgpack.png" width="50%">
 
 ## Test in Python
