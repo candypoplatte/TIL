@@ -1,6 +1,6 @@
 ---
 title: getLogger 함수는 오직 한 인스턴스만 반환
-date: 2018-11-12 23:49:16
+date: 2018-11-19
 categories:
   - development
 ---
