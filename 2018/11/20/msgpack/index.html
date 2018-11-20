@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Binary Serialization Format. 데이터를 바이너리 형태로 직렬화한다. JSON보다 용량이 훨씬 작아 빠른 통신에 유용하다.  Redis와 Fluentd의 메시지 포맷으로 사용된다.  Test in Python설치1pip install msgpack 실행12345&amp;gt;&amp;gt;&amp;gt; import msgpack&amp;gt;&amp;gt;&amp;gt; msg">
+    <meta name="description" content="Binary Serialization Format. 데이터를 바이너리 형태로 직렬화한다. JSON보다 용량이 훨씬 작아 빠른 통신에 유용하다.  Redis와 Fluentd의 메시지 포맷으로 사용된다. JSON VS MessagePack Test in Python설치1pip install msgpack 실행12345&amp;gt;&amp;gt;&amp;gt; import msgp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MessagePack">
 <meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/11/20/msgpack/index.html">
 <meta property="og:site_name" content="Today I Learned">
-<meta property="og:description" content="Binary Serialization Format. 데이터를 바이너리 형태로 직렬화한다. JSON보다 용량이 훨씬 작아 빠른 통신에 유용하다.  Redis와 Fluentd의 메시지 포맷으로 사용된다.  Test in Python설치1pip install msgpack 실행12345&amp;gt;&amp;gt;&amp;gt; import msgpack&amp;gt;&amp;gt;&amp;gt; msg">
+<meta property="og:description" content="Binary Serialization Format. 데이터를 바이너리 형태로 직렬화한다. JSON보다 용량이 훨씬 작아 빠른 통신에 유용하다.  Redis와 Fluentd의 메시지 포맷으로 사용된다. JSON VS MessagePack Test in Python설치1pip install msgpack 실행12345&amp;gt;&amp;gt;&amp;gt; import msgp">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://candypoplatte.github.io/TIL/images/msgpack.png">
-<meta property="og:updated_time" content="2018-11-20T12:23:59.707Z">
+<meta property="og:updated_time" content="2018-11-20T12:26:12.915Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MessagePack">
-<meta name="twitter:description" content="Binary Serialization Format. 데이터를 바이너리 형태로 직렬화한다. JSON보다 용량이 훨씬 작아 빠른 통신에 유용하다.  Redis와 Fluentd의 메시지 포맷으로 사용된다.  Test in Python설치1pip install msgpack 실행12345&amp;gt;&amp;gt;&amp;gt; import msgpack&amp;gt;&amp;gt;&amp;gt; msg">
+<meta name="twitter:description" content="Binary Serialization Format. 데이터를 바이너리 형태로 직렬화한다. JSON보다 용량이 훨씬 작아 빠른 통신에 유용하다.  Redis와 Fluentd의 메시지 포맷으로 사용된다. JSON VS MessagePack Test in Python설치1pip install msgpack 실행12345&amp;gt;&amp;gt;&amp;gt; import msgp">
 <meta name="twitter:image" content="https://candypoplatte.github.io/TIL/images/msgpack.png">
     
     
@@ -98,7 +98,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Test-in-Python"><span class="toc-number">1.</span> <span class="toc-text">Test in Python</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#설치"><span class="toc-number">1.1.</span> <span class="toc-text">설치</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#실행"><span class="toc-number">1.2.</span> <span class="toc-text">실행</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Links"><span class="toc-number">2.</span> <span class="toc-text">Links</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON-VS-MessagePack"><span class="toc-number">1.</span> <span class="toc-text">JSON VS MessagePack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Test-in-Python"><span class="toc-number">2.</span> <span class="toc-text">Test in Python</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#설치"><span class="toc-number">2.1.</span> <span class="toc-text">설치</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#실행"><span class="toc-number">2.2.</span> <span class="toc-text">실행</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Links"><span class="toc-number">3.</span> <span class="toc-text">Links</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -141,7 +141,7 @@
   <div class="content" itemprop="articleBody">
     <p>Binary Serialization Format. 데이터를 바이너리 형태로 직렬화한다. JSON보다 용량이 훨씬 작아 빠른 통신에 유용하다. </p>
 <p>Redis와 Fluentd의 메시지 포맷으로 사용된다.</p>
-<p><img src="/TIL/images/msgpack.png" width="50%"></p>
+<h2 id="JSON-VS-MessagePack"><a href="#JSON-VS-MessagePack" class="headerlink" title="JSON VS MessagePack"></a>JSON VS MessagePack</h2><p><img src="/TIL/images/msgpack.png" width="50%"></p>
 <h2 id="Test-in-Python"><a href="#Test-in-Python" class="headerlink" title="Test in Python"></a>Test in Python</h2><h3 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install msgpack</span><br></pre></td></tr></table></figure>
 <h3 id="실행"><a href="#실행" class="headerlink" title="실행"></a>실행</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> msgpack</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msgpack.packb(&#123;<span class="string">'number'</span>: <span class="number">3</span>&#125;)</span><br><span class="line"><span class="string">b'\x81\xa6number\x03'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msgpack.unpackb(_, raw=<span class="keyword">False</span>)</span><br><span class="line">&#123;<span class="string">'number'</span>: <span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><ul>
@@ -168,7 +168,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Test-in-Python"><span class="toc-number">1.</span> <span class="toc-text">Test in Python</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#설치"><span class="toc-number">1.1.</span> <span class="toc-text">설치</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#실행"><span class="toc-number">1.2.</span> <span class="toc-text">실행</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Links"><span class="toc-number">2.</span> <span class="toc-text">Links</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON-VS-MessagePack"><span class="toc-number">1.</span> <span class="toc-text">JSON VS MessagePack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Test-in-Python"><span class="toc-number">2.</span> <span class="toc-text">Test in Python</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#설치"><span class="toc-number">2.1.</span> <span class="toc-text">설치</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#실행"><span class="toc-number">2.2.</span> <span class="toc-text">실행</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Links"><span class="toc-number">3.</span> <span class="toc-text">Links</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
