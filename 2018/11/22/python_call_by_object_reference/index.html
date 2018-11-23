@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="파이썬에서,  Mutable 객체는 Call by Reference 처럼 (List, Dictionary, Set 등) Immutable 객체는 Call by Value 처럼 (Tuble, String 등)  동작한다. Test테스트를 해 보았다. Test #1. Immutable Object12345678910111213import sysdef f(x):">
+    <meta name="description" content="파이썬에서,  Mutable 객체는 Call by Reference 처럼 (List, Dictionary, Set 등) 동작한다. Immutable 객체는 Call by Value 처럼 (Tuble, String 등) 동작한다.  Test테스트를 해 보았다. Test #1. Immutable Object12345678910111213import sysdef">
 <meta property="og:type" content="article">
 <meta property="og:title" content="파이썬은 Call by Object-Reference">
 <meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/11/22/python_call_by_object_reference/index.html">
 <meta property="og:site_name" content="Today I Learned">
-<meta property="og:description" content="파이썬에서,  Mutable 객체는 Call by Reference 처럼 (List, Dictionary, Set 등) Immutable 객체는 Call by Value 처럼 (Tuble, String 등)  동작한다. Test테스트를 해 보았다. Test #1. Immutable Object12345678910111213import sysdef f(x):">
+<meta property="og:description" content="파이썬에서,  Mutable 객체는 Call by Reference 처럼 (List, Dictionary, Set 등) 동작한다. Immutable 객체는 Call by Value 처럼 (Tuble, String 등) 동작한다.  Test테스트를 해 보았다. Test #1. Immutable Object12345678910111213import sysdef">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-23T00:41:18.154Z">
+<meta property="og:updated_time" content="2018-11-23T01:19:32.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="파이썬은 Call by Object-Reference">
-<meta name="twitter:description" content="파이썬에서,  Mutable 객체는 Call by Reference 처럼 (List, Dictionary, Set 등) Immutable 객체는 Call by Value 처럼 (Tuble, String 등)  동작한다. Test테스트를 해 보았다. Test #1. Immutable Object12345678910111213import sysdef f(x):">
+<meta name="twitter:description" content="파이썬에서,  Mutable 객체는 Call by Reference 처럼 (List, Dictionary, Set 등) 동작한다. Immutable 객체는 Call by Value 처럼 (Tuble, String 등) 동작한다.  Test테스트를 해 보았다. Test #1. Immutable Object12345678910111213import sysdef">
     
     
         
@@ -139,10 +139,9 @@
   <div class="content" itemprop="articleBody">
     <p>파이썬에서,</p>
 <ul>
-<li>Mutable 객체는 Call by Reference 처럼 (List, Dictionary, Set 등)</li>
-<li>Immutable 객체는 Call by Value 처럼 (Tuble, String 등)</li>
+<li>Mutable 객체는 Call by Reference 처럼 (List, Dictionary, Set 등) 동작한다.</li>
+<li>Immutable 객체는 Call by Value 처럼 (Tuble, String 등) 동작한다.</li>
 </ul>
-<p>동작한다.</p>
 <h2 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h2><p>테스트를 해 보았다.</p>
 <h3 id="Test-1-Immutable-Object"><a href="#Test-1-Immutable-Object" class="headerlink" title="Test #1. Immutable Object"></a>Test #1. Immutable Object</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    print(<span class="string">'3'</span>, x, id(x), sys.getrefcount(x))</span><br><span class="line">    x = x + <span class="number">1</span>  <span class="comment"># 이 때 Object-Reference 변경 (Local Scope)</span></span><br><span class="line">    print(<span class="string">'4'</span>, x, id(x), sys.getrefcount(x))</span><br><span class="line"></span><br><span class="line">a = <span class="number">1</span></span><br><span class="line">print(<span class="string">'1'</span>, a, id(a), sys.getrefcount(a))</span><br><span class="line">a = <span class="number">2</span>  <span class="comment"># 이 때 Object-Reference 변경</span></span><br><span class="line">print(<span class="string">'2'</span>, a, id(a), sys.getrefcount(a))</span><br><span class="line">f(a)</span><br><span class="line">print(<span class="string">'5'</span>, a, id(a), sys.getrefcount(a))</span><br></pre></td></tr></table></figure>
 <p>결과</p>
@@ -154,9 +153,9 @@
 <p>결과</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1 [] 4385711624 3</span><br><span class="line">2 [3] 4385711944 3</span><br><span class="line">3 [3] 4385711944 5</span><br><span class="line">4 [4, 3] 4385711688 3</span><br><span class="line">5 [3] 4385711944 3</span><br></pre></td></tr></table></figure>
 <h2 id="다시-정리"><a href="#다시-정리" class="headerlink" title="다시 정리"></a>다시 정리</h2><blockquote>
-<p>처음에 작성했던 문장을 다시 이해해보자</p>
+<p>처음에 작성했던 문장을 다시 이해해보자<br>파이썬은 다 Object!</p>
 </blockquote>
-<p>파이썬은 Call by Object-Reference.</p>
+<p>파이썬은 Call by Object-Reference. </p>
 <p>함수의 Parameter로 전달된 직후를 확인하면 Reference가 전달된 것을 볼 수 있다. (Test #1, #2-1, #2-2 참고)</p>
 <p>1 . “Immutable Object는 Call by Value <strong>처럼</strong> 동작한다”의 의미</p>
 <ul>
