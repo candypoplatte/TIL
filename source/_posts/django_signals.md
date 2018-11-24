@@ -1,5 +1,5 @@
 ---
-title: Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)
+title: Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기
 date: 2018-11-24
 categories:
   - development
@@ -9,7 +9,7 @@ categories:
 
 Django 공식 문서를 찾아보니, Receiver 함수를 Django App의 루트 모듈이나 `models` 모듈에 위치시키는 것을 추천하지 않는다고 한다. (import issue 방지)
 
-그래서 별도 모듈로 분리하여 관리하기로 결정했다. (`signals.py`)  
+그래서 별도 모듈로 분리하여 관리하기로 결정했다.
 (세부 사항은 [Django 공식 문서](https://docs.djangoproject.com/en/2.1/topics/signals/#receiver-functions)와 책 `Two Scoops of Django`를 참고하였다.)
 
 ## 별도 모듈로 관리하기 (signals.py)
