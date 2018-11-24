@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="나는 여태까지 Signal Receiver 함수는 models.py안에 작성했다. 그런데 Receiver 함수가 많아지면서 models.py의 사이즈가 커졌고, 코드 양이 많아 정작 모델을 파악하기 힘들어졌다. Django 공식 문서를 찾아보니, Receiver 함수를 Django App의 루트 모듈이나 models 모듈에 위치시키는 것을 추천하지 않는다고">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)">
+<meta property="og:title" content="Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기">
 <meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/11/24/django_signals/index.html">
 <meta property="og:site_name" content="Today I Learned">
 <meta property="og:description" content="나는 여태까지 Signal Receiver 함수는 models.py안에 작성했다. 그런데 Receiver 함수가 많아지면서 models.py의 사이즈가 커졌고, 코드 양이 많아 정작 모델을 파악하기 힘들어졌다. Django 공식 문서를 찾아보니, Receiver 함수를 Django App의 루트 모듈이나 models 모듈에 위치시키는 것을 추천하지 않는다고">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-24T19:30:41.784Z">
+<meta property="og:updated_time" content="2018-11-24T19:35:10.329Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)">
+<meta name="twitter:title" content="Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기">
 <meta name="twitter:description" content="나는 여태까지 Signal Receiver 함수는 models.py안에 작성했다. 그런데 Receiver 함수가 많아지면서 models.py의 사이즈가 커졌고, 코드 양이 많아 정작 모델을 파악하기 힘들어졌다. Django 공식 문서를 찾아보니, Receiver 함수를 Django App의 루트 모듈이나 models 모듈에 위치시키는 것을 추천하지 않는다고">
     
     
@@ -36,7 +36,7 @@
         
     
     <!-- title -->
-    <title>Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)</title>
+    <title>Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기</title>
     <!-- styles -->
     <link rel="stylesheet" href="/TIL/css/style.css">
     <!-- persian styles -->
@@ -83,15 +83,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&text=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&is_video=false&description=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/24/django_signals/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&name=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&text=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&is_video=false&description=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/24/django_signals/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&name=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -108,7 +108,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)
+        Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기
     </h1>
 
 
@@ -139,7 +139,7 @@
   <div class="content" itemprop="articleBody">
     <p>나는 여태까지 Signal Receiver 함수는 <code>models.py</code>안에 작성했다. 그런데 Receiver 함수가 많아지면서 <code>models.py</code>의 사이즈가 커졌고, 코드 양이 많아 정작 모델을 파악하기 힘들어졌다.</p>
 <p>Django 공식 문서를 찾아보니, Receiver 함수를 Django App의 루트 모듈이나 <code>models</code> 모듈에 위치시키는 것을 추천하지 않는다고 한다. (import issue 방지)</p>
-<p>그래서 별도 모듈로 분리하여 관리하기로 결정했다. (<code>signals.py</code>)<br>(세부 사항은 <a href="https://docs.djangoproject.com/en/2.1/topics/signals/#receiver-functions" target="_blank" rel="noopener">Django 공식 문서</a>와 책 <code>Two Scoops of Django</code>를 참고하였다.)</p>
+<p>그래서 별도 모듈로 분리하여 관리하기로 결정했다.<br>(세부 사항은 <a href="https://docs.djangoproject.com/en/2.1/topics/signals/#receiver-functions" target="_blank" rel="noopener">Django 공식 문서</a>와 책 <code>Two Scoops of Django</code>를 참고하였다.)</p>
 <h2 id="별도-모듈로-관리하기-signals-py"><a href="#별도-모듈로-관리하기-signals-py" class="headerlink" title="별도 모듈로 관리하기 (signals.py)"></a>별도 모듈로 관리하기 (signals.py)</h2><ol>
 <li>Django App 하위에 <code>signals</code>라는 이름의 module을 추가한다.</li>
 <li>해당 Application의 Configuration Class의 <code>ready()</code> method에서 import하도록 한다.<ul>
@@ -179,15 +179,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&text=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&is_video=false&description=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/24/django_signals/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&name=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기 (signals.py)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&text=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&is_video=false&description=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/24/django_signals/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&title=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/24/django_signals/&name=Django Signal Receiver 함수를 별도 모듈로 분리하여 관리하기&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
