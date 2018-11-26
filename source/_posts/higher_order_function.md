@@ -10,7 +10,7 @@ categories:
 1. 하나 이상의 함수를 인자로 전달 받음
 2. 함수 자체를 반환함
 
-Python의 `map`이 대표적인 고계함수다.
+Python의 Built-in 함수인 ``이 대표적인 고계함수다. (함수를 인자로 받음)
 
 ## Links
 - [Wikipedia](https://en.wikipedia.org/wiki/Higher-order_function)
