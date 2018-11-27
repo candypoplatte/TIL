@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="요즘 파이썬의 빌트인 패키지 중 로깅(Logging) 패키지를 열심히 보고 있다. Logging Package 파이썬 빌트인 패키지 PEP 282를 기반으로 함 주요 개발자 : Vinay Sajip  Logging Level로그의 중요도를 비교할 수 있는 척도. 정수로된 상수이다. Level이 너무 많으면 Level을 선택하기 힘들어져 혼란스러울 수 있다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Logging Package, Logging Level, getLevelName&#x2F;addLevelName">
+<meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/index.html">
+<meta property="og:site_name" content="Today I Learned">
+<meta property="og:description" content="요즘 파이썬의 빌트인 패키지 중 로깅(Logging) 패키지를 열심히 보고 있다. Logging Package 파이썬 빌트인 패키지 PEP 282를 기반으로 함 주요 개발자 : Vinay Sajip  Logging Level로그의 중요도를 비교할 수 있는 척도. 정수로된 상수이다. Level이 너무 많으면 Level을 선택하기 힘들어져 혼란스러울 수 있다.">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-27T16:39:16.914Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python Logging Package, Logging Level, getLevelName&#x2F;addLevelName">
+<meta name="twitter:description" content="요즘 파이썬의 빌트인 패키지 중 로깅(Logging) 패키지를 열심히 보고 있다. Logging Package 파이썬 빌트인 패키지 PEP 282를 기반으로 함 주요 개발자 : Vinay Sajip  Logging Level로그의 중요도를 비교할 수 있는 척도. 정수로된 상수이다. Level이 너무 많으면 Level을 선택하기 힘들어져 혼란스러울 수 있다.">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/TIL/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/TIL/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/TIL/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Python Logging Package, Logging Level, getLevelName/addLevelName</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/TIL/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/TIL/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/TIL/2018/11/27/python_bug_tracker/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&text=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&is_video=false&description=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging Package, Logging Level, getLevelName/addLevelName&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&name=Python Logging Package, Logging Level, getLevelName/addLevelName&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logging-Package"><span class="toc-number">1.</span> <span class="toc-text">Logging Package</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Logging-Level"><span class="toc-number">2.</span> <span class="toc-text">Logging Level</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getLevelName-함수"><span class="toc-number">3.</span> <span class="toc-text">getLevelName 함수</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#addLevelName-함수"><span class="toc-number">4.</span> <span class="toc-text">addLevelName 함수</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Links"><span class="toc-number">5.</span> <span class="toc-text">Links</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Python Logging Package, Logging Level, getLevelName/addLevelName
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Today I Learned</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-11-26T15:00:00.000Z" itemprop="datePublished">2018-11-27</time>
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/TIL/categories/development/">development</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>요즘 파이썬의 빌트인 패키지 중 로깅(Logging) 패키지를 열심히 보고 있다.</p>
+<h2 id="Logging-Package"><a href="#Logging-Package" class="headerlink" title="Logging Package"></a>Logging Package</h2><ul>
+<li>파이썬 빌트인 패키지</li>
+<li>PEP 282를 기반으로 함</li>
+<li>주요 개발자 : Vinay Sajip</li>
+</ul>
+<h2 id="Logging-Level"><a href="#Logging-Level" class="headerlink" title="Logging Level"></a>Logging Level</h2><p>로그의 중요도를 비교할 수 있는 척도. 정수로된 상수이다. Level이 너무 많으면 Level을 선택하기 힘들어져 혼란스러울 수 있다.</p>
+<p>파이썬 로깅 패키지에 기본 설정된 Logging Level 상수는 아래와 같다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CRITICAL = <span class="number">50</span></span><br><span class="line">FATAL = CRITICAL</span><br><span class="line">ERROR = <span class="number">40</span></span><br><span class="line">WARNING = <span class="number">30</span></span><br><span class="line">WARN = WARNING</span><br><span class="line">INFO = <span class="number">20</span></span><br><span class="line">DEBUG = <span class="number">10</span></span><br><span class="line">NOTSET = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>그리고 level(숫자) <-> name(문자열) 양방향 매핑을 위한 두 개의 Dictionary가 있다.</-></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">_levelToName = &#123;</span><br><span class="line">    CRITICAL: <span class="string">'CRITICAL'</span>,</span><br><span class="line">    ERROR: <span class="string">'ERROR'</span>,</span><br><span class="line">    WARNING: <span class="string">'WARNING'</span>,</span><br><span class="line">    INFO: <span class="string">'INFO'</span>,</span><br><span class="line">    DEBUG: <span class="string">'DEBUG'</span>,</span><br><span class="line">    NOTSET: <span class="string">'NOTSET'</span>,</span><br><span class="line">&#125;</span><br><span class="line">_nameToLevel = &#123;</span><br><span class="line">    <span class="string">'CRITICAL'</span>: CRITICAL,</span><br><span class="line">    <span class="string">'FATAL'</span>: FATAL,</span><br><span class="line">    <span class="string">'ERROR'</span>: ERROR,</span><br><span class="line">    <span class="string">'WARN'</span>: WARNING,</span><br><span class="line">    <span class="string">'WARNING'</span>: WARNING,</span><br><span class="line">    <span class="string">'INFO'</span>: INFO,</span><br><span class="line">    <span class="string">'DEBUG'</span>: DEBUG,</span><br><span class="line">    <span class="string">'NOTSET'</span>: NOTSET,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="getLevelName-함수"><a href="#getLevelName-함수" class="headerlink" title="getLevelName 함수"></a>getLevelName 함수</h2><blockquote>
+<p>getLevelName(level)</p>
+</blockquote>
+<p>Logging Level 혹은 Logging Level Name을 반환하는 함수.</p>
+<ol>
+<li>미리 정의된 Logging Level 이면, Logging Level Name 반환</li>
+<li>미리 정의된 Logging Level Name 이면, Loggin Level 반환</li>
+<li>“Level <level>“ 반환</level></li>
+</ol>
+<p>깔끔하게 Level을 넣으면 Level Name을 반환한다거나 하지 않고, Level과 Level Name을 다 받아주는 함수다!</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLevelName</span><span class="params">(level)</span>:</span></span><br><span class="line">    <span class="comment"># See Issues #22386, #27937 and #29220 for why it's this way</span></span><br><span class="line">    result = _levelToName.get(level)</span><br><span class="line">    <span class="keyword">if</span> result <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    result = _nameToLevel.get(level)</span><br><span class="line">    <span class="keyword">if</span> result <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Level %s"</span> % level</span><br></pre></td></tr></table></figure>
+<p><a href="https://bugs.python.org/issue22386" target="_blank" rel="noopener">이슈 #22386</a>, <a href="https://bugs.python.org/issue27937" target="_blank" rel="noopener">이슈 #27937</a>, <a href="https://bugs.python.org/issue29220" target="_blank" rel="noopener">이슈 #29220</a>를 살펴보니 처음에는 아래와 같이 아주 간단했었다. 여러 이슈를 거치면서 아주 관대한 함수가 되어버림!</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLevelName</span><span class="params">(level)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> _levelToName.get(level, (<span class="string">"Level %s"</span> % level))</span><br></pre></td></tr></table></figure>
+<p>그리고 camelCase로 되어있다…!</p>
+<h2 id="addLevelName-함수"><a href="#addLevelName-함수" class="headerlink" title="addLevelName 함수"></a>addLevelName 함수</h2><blockquote>
+<p>addLevelName(level, levelName)</p>
+</blockquote>
+<p>level과 대응되는 levelName을 추가하는 함수.</p>
+<p><code>_levelToName</code>과 <code>_nameToLevel</code> Dictionary에 매핑 정보를 추가한다. 추가하기 전에 shared data에 대한 Lock을 획득하고, 추가 후 해제한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addLevelName</span><span class="params">(level, levelName)</span>:</span></span><br><span class="line">    _acquireLock()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        _levelToName[level] = levelName</span><br><span class="line">        _nameToLevel[levelName] = level</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        _releaseLock()</span><br></pre></td></tr></table></figure>
+<h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><ul>
+<li><a href="https://www.python.org/dev/peps/pep-0282/" target="_blank" rel="noopener">PEP 282</a></li>
+<li><a href="https://bugs.python.org/issue22386" target="_blank" rel="noopener">이슈 #22386</a></li>
+<li><a href="https://bugs.python.org/issue27937" target="_blank" rel="noopener">이슈 #27937</a></li>
+<li><a href="https://bugs.python.org/issue29220" target="_blank" rel="noopener">이슈 #29220</a></li>
+<li><a href="https://github.com/python/cpython/blob/3.7/Lib/logging/__init__.py" target="_blank" rel="noopener">Python Logging Package (3.7)</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logging-Package"><span class="toc-number">1.</span> <span class="toc-text">Logging Package</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Logging-Level"><span class="toc-number">2.</span> <span class="toc-text">Logging Level</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getLevelName-함수"><span class="toc-number">3.</span> <span class="toc-text">getLevelName 함수</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#addLevelName-함수"><span class="toc-number">4.</span> <span class="toc-text">addLevelName 함수</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Links"><span class="toc-number">5.</span> <span class="toc-text">Links</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&text=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&is_video=false&description=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging Package, Logging Level, getLevelName/addLevelName&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging Package, Logging Level, getLevelName/addLevelName"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&name=Python Logging Package, Logging Level, getLevelName/addLevelName&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 HyunTae Hwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/TIL/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/TIL/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/TIL/lib/jquery/jquery.min.js"></script>
+<script src="/TIL/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/TIL/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
