@@ -1,5 +1,5 @@
 ---
-title: Python Logging Package, Logging Level, getLevelName/addLevelName
+title: 파이썬 로깅 패키지, 로깅 레벨, getLevelName/addLevelName 함수
 date: 2018-11-27
 categories:
   - development

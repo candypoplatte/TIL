@@ -1,5 +1,5 @@
 ---
-title: Python Bug Tracker
+title: 파이썬 버그 트래커
 date: 2018-11-27
 categories:
   - development
