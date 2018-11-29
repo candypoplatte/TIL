@@ -8,17 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="한 프로세스 내 쓰레드들은 (가상) 메모리 내 힙, 스택, 코드 영역을 공유한다. 파이썬의 GIL과는 별개로, 쓰레드간 공유되는 데이터의 경쟁은 데이터를 꼬이게 만들 수 있다.  ex. 쓰레드 간 context change가 발생할 때, 특정 쓰레드에서 실행되는 함수가 다른 쓰레드에서도 쓰이는 공유 데이터를 수정해버린다면 데이터가 꼬일 수 있다.  Lock">
 <meta property="og:type" content="article">
-<meta property="og:title" content="파이썬에서 Thread 간 Shared Data Lock">
+<meta property="og:title" content="파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)">
 <meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/index.html">
 <meta property="og:site_name" content="Today I Learned">
 <meta property="og:description" content="한 프로세스 내 쓰레드들은 (가상) 메모리 내 힙, 스택, 코드 영역을 공유한다. 파이썬의 GIL과는 별개로, 쓰레드간 공유되는 데이터의 경쟁은 데이터를 꼬이게 만들 수 있다.  ex. 쓰레드 간 context change가 발생할 때, 특정 쓰레드에서 실행되는 함수가 다른 쓰레드에서도 쓰이는 공유 데이터를 수정해버린다면 데이터가 꼬일 수 있다.  Lock">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://candypoplatte.github.io/TIL/images/lock_explanation.png">
-<meta property="og:updated_time" content="2018-11-29T16:11:35.127Z">
+<meta property="og:image" content="https://candypoplatte.github.io/TIL/images/lock_explanation.jpeg">
+<meta property="og:updated_time" content="2018-11-29T16:16:13.328Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="파이썬에서 Thread 간 Shared Data Lock">
+<meta name="twitter:title" content="파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)">
 <meta name="twitter:description" content="한 프로세스 내 쓰레드들은 (가상) 메모리 내 힙, 스택, 코드 영역을 공유한다. 파이썬의 GIL과는 별개로, 쓰레드간 공유되는 데이터의 경쟁은 데이터를 꼬이게 만들 수 있다.  ex. 쓰레드 간 context change가 발생할 때, 특정 쓰레드에서 실행되는 함수가 다른 쓰레드에서도 쓰이는 공유 데이터를 수정해버린다면 데이터가 꼬일 수 있다.  Lock">
-<meta name="twitter:image" content="https://candypoplatte.github.io/TIL/images/lock_explanation.png">
+<meta name="twitter:image" content="https://candypoplatte.github.io/TIL/images/lock_explanation.jpeg">
     
     
         
@@ -38,7 +38,7 @@
         
     
     <!-- title -->
-    <title>파이썬에서 Thread 간 Shared Data Lock</title>
+    <title>파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)</title>
     <!-- styles -->
     <link rel="stylesheet" href="/TIL/css/style.css">
     <!-- persian styles -->
@@ -71,7 +71,7 @@
       <ul>
         
         
-        <li><a class="icon" href="/TIL/2018/11/27/python_bug_tracker/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/TIL/2018/11/27/python_logging_level/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -85,15 +85,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&text=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&is_video=false&description=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=파이썬에서 Thread 간 Shared Data Lock&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&name=파이썬에서 Thread 간 Shared Data Lock&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&text=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&is_video=false&description=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&name=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -110,7 +110,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        파이썬에서 Thread 간 Shared Data Lock
+        파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)
     </h1>
 
 
@@ -146,7 +146,7 @@
 </ul>
 <h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock()"></a>Lock()</h2><p>python threading 패키지에서는 Lock을 지원한다.</p>
 <p>lock을 acquire하면 해당 쓰레드만 공유 데이터에 접근할 수 있고, lock을 release 해야 다른 쓰레드에서 공유 데이터에 접근할 수 있다.</p>
-<p><img src="/TIL/images/lock_explanation.png" width="50%"></p>
+<p><img src="/TIL/images/lock_explanation.jpeg" width="50%"></p>
 <h2 id="RLock"><a href="#RLock" class="headerlink" title="RLock()"></a>RLock()</h2><p>간혹 lock을 거는 함수가 재귀호출을 하는 경우 쓰레드가 Block되어 Lock을 해제할 수 없게 되어버림</p>
 <p>RLock()은 쓰레드가 lock을 취득한 상태에서 lock을 다시 취득하면 lock count를 1 올리면서 즉시 return한다.</p>
 <p>“lock 재 획득 문제를 해결”</p>
@@ -197,15 +197,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&text=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&is_video=false&description=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=파이썬에서 Thread 간 Shared Data Lock&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&name=파이썬에서 Thread 간 Shared Data Lock&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&text=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&is_video=false&description=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&title=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/29/threading_rlock/&name=파이썬에서 Thread 간 Shared Data Lock (&amp; RLock)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
