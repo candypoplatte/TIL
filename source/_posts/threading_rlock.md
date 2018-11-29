@@ -21,6 +21,8 @@ lock을 acquire하면 해당 쓰레드만 공유 데이터에 접근할 수 있�
 
 ## RLock()
 
+"Reentrant Lock"
+
 간혹 lock을 거는 함수가 재귀호출을 하는 경우 쓰레드가 Block되어 Lock을 해제할 수 없게 되어버림
 
 RLock()은 쓰레드가 lock을 취득한 상태에서 lock을 다시 취득하면 lock count를 1 올리면서 즉시 return한다.

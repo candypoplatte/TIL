@@ -1,5 +1,5 @@
 ---
-title: getLogger 함수는 오직 한 인스턴스만 반환
+title: Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환
 date: 2018-11-19
 categories:
   - development

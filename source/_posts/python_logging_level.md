@@ -1,5 +1,5 @@
 ---
-title: 파이썬 로깅 패키지, 로깅 레벨, getLevelName/addLevelName 함수
+title: Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName
 date: 2018-11-27
 categories:
   - development
