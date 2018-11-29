@@ -1,5 +1,5 @@
 ---
-title: 파이썬에서 Thread 간 Shared Data Lock
+title: 파이썬에서 Thread 간 Shared Data Lock (& RLock)
 date: 2018-11-29
 categories:
   - development
@@ -17,7 +17,7 @@ python threading 패키지에서는 Lock을 지원한다.
 
 lock을 acquire하면 해당 쓰레드만 공유 데이터에 접근할 수 있고, lock을 release 해야 다른 쓰레드에서 공유 데이터에 접근할 수 있다.
 
-<img src="/TIL/images/lock_explanation.png" width="50%">
+<img src="/TIL/images/lock_explanation.jpeg" width="50%">
 
 ## RLock()
 
