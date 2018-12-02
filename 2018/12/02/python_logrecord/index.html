@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="파이썬 로깅 패키지의 init.py 파일에서 제일 처음 선언되는 클래스는 LogRecord다. LogRecord?LogRecord 인스턴스는 로깅된 이벤트를 나타낸다. 무언가가 로깅될 때마다 생성되며, 로깅되는 이벤트와 관련된 모든 정보를 담고있다. 전달되는 주요 정보는 msg와 args이며, str(msg) % args를 통해 Record의 message">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Logging 파헤치기 - LogRecord 클래스">
+<meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/index.html">
+<meta property="og:site_name" content="Today I Learned">
+<meta property="og:description" content="파이썬 로깅 패키지의 init.py 파일에서 제일 처음 선언되는 클래스는 LogRecord다. LogRecord?LogRecord 인스턴스는 로깅된 이벤트를 나타낸다. 무언가가 로깅될 때마다 생성되며, 로깅되는 이벤트와 관련된 모든 정보를 담고있다. 전달되는 주요 정보는 msg와 args이며, str(msg) % args를 통해 Record의 message">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-02T17:47:49.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python Logging 파헤치기 - LogRecord 클래스">
+<meta name="twitter:description" content="파이썬 로깅 패키지의 init.py 파일에서 제일 처음 선언되는 클래스는 LogRecord다. LogRecord?LogRecord 인스턴스는 로깅된 이벤트를 나타낸다. 무언가가 로깅될 때마다 생성되며, 로깅되는 이벤트와 관련된 모든 정보를 담고있다. 전달되는 주요 정보는 msg와 args이며, str(msg) % args를 통해 Record의 message">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/TIL/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/TIL/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/TIL/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Python Logging 파헤치기 - LogRecord 클래스</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/TIL/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/TIL/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/TIL/2018/11/29/threading_rlock/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&text=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&is_video=false&description=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - LogRecord 클래스&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&name=Python Logging 파헤치기 - LogRecord 클래스&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#LogRecord"><span class="toc-number">1.</span> <span class="toc-text">LogRecord?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Methods"><span class="toc-number">2.</span> <span class="toc-text">Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#init"><span class="toc-number">2.1.</span> <span class="toc-text">__init__</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#str"><span class="toc-number">2.2.</span> <span class="toc-text">__str__</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getMessage"><span class="toc-number">2.3.</span> <span class="toc-text">getMessage</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Python Logging 파헤치기 - LogRecord 클래스
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Today I Learned</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-12-01T15:00:00.000Z" itemprop="datePublished">2018-12-02</time>
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/TIL/categories/development/">development</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>파이썬 로깅 패키지의 <code>init.py</code> 파일에서 제일 처음 선언되는 클래스는 <code>LogRecord</code>다.</p>
+<h2 id="LogRecord"><a href="#LogRecord" class="headerlink" title="LogRecord?"></a>LogRecord?</h2><p>LogRecord 인스턴스는 <strong>로깅된 이벤트</strong>를 나타낸다.</p>
+<p>무언가가 <strong>로깅될 때마다 생성</strong>되며, 로깅되는 <strong>이벤트와 관련된 모든 정보</strong>를 담고있다. 전달되는 주요 정보는 <code>msg</code>와 <code>args</code>이며, <code>str(msg) % args</code>를 통해 Record의 message 필드를 생성하는데 사용된다. 또한 생성된 시기(created), 로깅 호출이 일어난 소스 라인, Exception 정보 또한 포함된다.”*</p>
+<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><h3 id="init"><a href="#init" class="headerlink" title="__init__"></a><code>__init__</code></h3><p>LogRecord 클래스의 초기화 Method.</p>
+<p>생성시간(created_time) <code>ct</code>를 가장 먼저 설정하고, 인스턴스 변수 <code>name</code>과 <code>msg</code>에 인자 값을 대입한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, level, pathname, lineno,</span></span></span><br><span class="line"><span class="function"><span class="params">              msg, args, exc_info, func=None, sinfo=None, **kwargs)</span>:</span></span><br><span class="line">    ct = time.time()</span><br><span class="line">    self.name = name</span><br><span class="line">    self.msg = msg</span><br></pre></td></tr></table></figure>
+<p>바로 아래에는 전달된 argument가 단 하나의 Dictionary일 때 이 첫 번째 Dictionary Argument를 <code>args</code> 변수에 대입하는 코드가 있다. <code>logging.debug(&quot;a %(a)d b %(b)s&quot;, {&#39;a&#39;:1, &#39;b&#39;:2})</code>처럼 작성 가능하게 하기 위함이다.</p>
+<p>여기서 재밌는 부분은 Dictionary 임을 체크할 때 <code>isinstance(args[0], dict)</code>가 아니라 <code>isinstance(args[0], collections.Mapping)</code>로 체크하는 부분이다.</p>
+<p><a href="https://bugs.python.org/issue21172" target="_blank" rel="noopener">Issue #21172</a>를 확인하여 아래의 과정을 통해 작성된 것을 확인하였다.</p>
+<ol>
+<li>처음에는 <code>isinstance(args[0], dict)</code>로 작성이 됨</li>
+<li>어차피 String Formatting을 위한 Dictionary이니 정도만 체크하자는 (<code>hasattr(..., &#39;__getitem__&#39;)</code>) Issue가 나옴</li>
+<li>논의 과정에서 String Formatting을 위한 Mapping을 할 때 Armument는 “single mapping object”여야 하기 때문에 <code>__getitem__</code>의 체크만으로는 부족하다는 의견도 나옴</li>
+<li>그래서 <code>dict</code> 보다는 완화된 <code>collections.Mapping</code> 클래스를 사용하게 됨</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (args <span class="keyword">and</span> len(args) == <span class="number">1</span> <span class="keyword">and</span> isinstance(args[<span class="number">0</span>], collections.Mapping)</span><br><span class="line">    <span class="keyword">and</span> args[<span class="number">0</span>]):</span><br><span class="line">    args = args[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">self.args = args</span><br></pre></td></tr></table></figure>
+<p>그 다음은 여러가지 변수의 초기화 과정이다. 로깅 레벨, 파일 이름, 모듈, 실행 정보, 스택, 라인, 함수, 생성시간 등 이벤트의 모든 정보가 다 있는 것을 볼 수 있다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">self.levelname = getLevelName(level)</span><br><span class="line">self.levelno = level</span><br><span class="line">self.pathname = pathname</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    self.filename = os.path.basename(pathname)</span><br><span class="line">    self.module = os.path.splitext(self.filename)[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">except</span> (TypeError, ValueError, AttributeError):</span><br><span class="line">    self.filename = pathname</span><br><span class="line">    self.module = <span class="string">"Unknown module"</span></span><br><span class="line">self.exc_info = exc_info</span><br><span class="line">self.exc_text = <span class="keyword">None</span></span><br><span class="line">self.stack_info = sinfo</span><br><span class="line">self.lineno = lineno</span><br><span class="line">self.funcName = func</span><br><span class="line">self.created = ct</span><br><span class="line">self.msecs = (ct - int(ct)) * <span class="number">1000</span></span><br><span class="line">self.relativeCreated = (self.created - _startTime) * <span class="number">1000</span></span><br></pre></td></tr></table></figure>
+<p>쓰레드, 프로세스 정보도 포함된다. (ID, 이름)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> logThreads <span class="keyword">and</span> threading:</span><br><span class="line">    self.thread = threading.get_ident()</span><br><span class="line">    self.threadName = threading.current_thread().name</span><br><span class="line"><span class="keyword">else</span>: <span class="comment"># pragma: no cover</span></span><br><span class="line">    self.thread = <span class="keyword">None</span></span><br><span class="line">    self.threadName = <span class="keyword">None</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> logMultiprocessing: <span class="comment"># pragma: no cover</span></span><br><span class="line">    self.processName = <span class="keyword">None</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    self.processName = <span class="string">'MainProcess'</span></span><br><span class="line">    mp = sys.modules.get(<span class="string">'multiprocessing'</span>)</span><br><span class="line">    <span class="keyword">if</span> mp <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.processName = mp.current_process().name</span><br><span class="line">        <span class="keyword">except</span> Exception: <span class="comment">#pragma: no cover</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">if</span> logProcesses <span class="keyword">and</span> hasattr(os, <span class="string">'getpid'</span>):</span><br><span class="line">    self.process = os.getpid()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    self.process = <span class="keyword">None</span></span><br></pre></td></tr></table></figure>
+<h3 id="str"><a href="#str" class="headerlink" title="__str__"></a><code>__str__</code></h3><p>인스턴스의 문자열 표현 Method.</p>
+<p>인스턴스 변수 <code>name</code>, <code>levelno</code>, <code>pathname</code>, <code>lineno</code>, <code>msg</code>를 하나의 문자열로 반환한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;LogRecord: %s, %s, %s, %s, "%s"&gt;'</span>%(self.name, self.levelno,</span><br><span class="line">        self.pathname, self.lineno, self.msg)</span><br><span class="line"></span><br><span class="line">__repr__ = __str__</span><br></pre></td></tr></table></figure>
+<h3 id="getMessage"><a href="#getMessage" class="headerlink" title="getMessage"></a><code>getMessage</code></h3><p>유저가 제공한 인수와, 메시지를 합친 (<code>msg % self.args</code>) LogRecord의 메시지를 반환하는 함수.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getMessage</span><span class="params">(self)</span>:</span></span><br><span class="line">    msg = str(self.msg)</span><br><span class="line">    <span class="keyword">if</span> self.args:</span><br><span class="line">        msg = msg % self.args</span><br><span class="line">    <span class="keyword">return</span> msg</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#LogRecord"><span class="toc-number">1.</span> <span class="toc-text">LogRecord?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Methods"><span class="toc-number">2.</span> <span class="toc-text">Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#init"><span class="toc-number">2.1.</span> <span class="toc-text">__init__</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#str"><span class="toc-number">2.2.</span> <span class="toc-text">__str__</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getMessage"><span class="toc-number">2.3.</span> <span class="toc-text">getMessage</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&text=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&is_video=false&description=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - LogRecord 클래스&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&name=Python Logging 파헤치기 - LogRecord 클래스&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 HyunTae Hwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/TIL/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/TIL/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/TIL/lib/jquery/jquery.min.js"></script>
+<script src="/TIL/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/TIL/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

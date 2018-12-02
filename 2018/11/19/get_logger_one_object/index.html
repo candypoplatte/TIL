@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="파이썬 로깅(Logging)을 공부하려고 파이썬 공식 로깅 튜토리얼 문서를 보다가 logging 모듈의 getLogger 함수의 특징을 정리해 봄 getLogger 함수의 특징 logging.getLogger(name=None)  로거(Logger)를 반환하는 함수. 입력된 name의 로거를 반환하며, name이 None인 경우에는 root 로거를 반환한다">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환">
+<meta property="og:title" content="Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환">
 <meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/index.html">
 <meta property="og:site_name" content="Today I Learned">
 <meta property="og:description" content="파이썬 로깅(Logging)을 공부하려고 파이썬 공식 로깅 튜토리얼 문서를 보다가 logging 모듈의 getLogger 함수의 특징을 정리해 봄 getLogger 함수의 특징 logging.getLogger(name=None)  로거(Logger)를 반환하는 함수. 입력된 name의 로거를 반환하며, name이 None인 경우에는 root 로거를 반환한다">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-29T16:24:59.160Z">
+<meta property="og:updated_time" content="2018-12-02T16:40:17.712Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환">
+<meta name="twitter:title" content="Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환">
 <meta name="twitter:description" content="파이썬 로깅(Logging)을 공부하려고 파이썬 공식 로깅 튜토리얼 문서를 보다가 logging 모듈의 getLogger 함수의 특징을 정리해 봄 getLogger 함수의 특징 logging.getLogger(name=None)  로거(Logger)를 반환하는 함수. 입력된 name의 로거를 반환하며, name이 None인 경우에는 root 로거를 반환한다">
     
     
@@ -36,7 +36,7 @@
         
     
     <!-- title -->
-    <title>Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환</title>
+    <title>Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환</title>
     <!-- styles -->
     <link rel="stylesheet" href="/TIL/css/style.css">
     <!-- persian styles -->
@@ -85,15 +85,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&text=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&is_video=false&description=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&name=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&text=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&is_video=false&description=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&name=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -110,7 +110,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환
+        Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환
     </h1>
 
 
@@ -179,15 +179,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&text=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&is_video=false&description=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&name=Python Logging 내부 - getLogger 함수는 오직 한 인스턴스만 반환&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&text=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&is_video=false&description=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&title=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/19/get_logger_one_object/&name=Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

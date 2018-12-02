@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="요즘 파이썬의 빌트인 패키지 중 로깅(Logging) 패키지를 열심히 보고 있다. Logging Package 파이썬 빌트인 패키지 PEP 282를 기반으로 함 주요 개발자 : Vinay Sajip  Logging Level로그의 중요도를 비교할 수 있는 척도. 정수로된 상수이다. Level이 너무 많으면 Level을 선택하기 힘들어져 혼란스러울 수 있다.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName&#x2F;addLevelName">
+<meta property="og:title" content="Python Logging 파헤치기 - 로깅 레벨, getLevelName&#x2F;addLevelName">
 <meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/index.html">
 <meta property="og:site_name" content="Today I Learned">
 <meta property="og:description" content="요즘 파이썬의 빌트인 패키지 중 로깅(Logging) 패키지를 열심히 보고 있다. Logging Package 파이썬 빌트인 패키지 PEP 282를 기반으로 함 주요 개발자 : Vinay Sajip  Logging Level로그의 중요도를 비교할 수 있는 척도. 정수로된 상수이다. Level이 너무 많으면 Level을 선택하기 힘들어져 혼란스러울 수 있다.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-29T16:30:26.912Z">
+<meta property="og:updated_time" content="2018-12-02T16:40:05.133Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName&#x2F;addLevelName">
+<meta name="twitter:title" content="Python Logging 파헤치기 - 로깅 레벨, getLevelName&#x2F;addLevelName">
 <meta name="twitter:description" content="요즘 파이썬의 빌트인 패키지 중 로깅(Logging) 패키지를 열심히 보고 있다. Logging Package 파이썬 빌트인 패키지 PEP 282를 기반으로 함 주요 개발자 : Vinay Sajip  Logging Level로그의 중요도를 비교할 수 있는 척도. 정수로된 상수이다. Level이 너무 많으면 Level을 선택하기 힘들어져 혼란스러울 수 있다.">
     
     
@@ -36,7 +36,7 @@
         
     
     <!-- title -->
-    <title>Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName</title>
+    <title>Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName</title>
     <!-- styles -->
     <link rel="stylesheet" href="/TIL/css/style.css">
     <!-- persian styles -->
@@ -68,7 +68,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/TIL/2018/11/29/threading_rlock/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/TIL/2018/11/29/logging_lock/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" href="/TIL/2018/11/27/python_bug_tracker/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -85,15 +85,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&text=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&is_video=false&description=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&name=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&text=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&is_video=false&description=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&name=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -110,7 +110,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName
+        Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName
     </h1>
 
 
@@ -204,15 +204,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&text=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&is_video=false&description=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&name=Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&text=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&is_video=false&description=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName&body=Check out this article: https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&title=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/11/27/python_logging_level/&name=Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
