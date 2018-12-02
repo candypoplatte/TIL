@@ -1,5 +1,5 @@
 ---
-title: 고계 함수 (Higher Order Funciton)
+title: 고계 함수 (Higher Order Function)
 date: 2018-11-24
 categories:
   - development

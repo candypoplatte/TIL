@@ -1,5 +1,5 @@
 ---
-title: Python Logging 내부 - Lock (_acquireLock, _releaseLock 함수)
+title: Python Logging 파헤치기 - Lock (_acquireLock, _releaseLock)
 date: 2018-11-29
 categories:
   - development

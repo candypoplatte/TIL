@@ -1,5 +1,5 @@
 ---
-title: Python Logging 내부 - 패키지 정보, 로깅 레벨, getLevelName/addLevelName
+title: Python Logging 파헤치기 - 로깅 레벨, getLevelName/addLevelName
 date: 2018-11-27
 categories:
   - development
