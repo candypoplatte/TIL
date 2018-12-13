@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="logging 패키지에는 어떤 Log Record 클래스를 사용할 지 정하기 위한 팩토리 함수들이 총 3개 있다. 우선 Default는 원래 LogRecord 클래스로 지정되어있다. 1_logRecordFactory = LogRecord setLogRecordFactory로그 레코드를 초기화할 때 사용되는 로그 레코드 팩토리를 정하는 함수. 글로벌 변수 _">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python Logging 파헤치기 - LogRecord 클래스 팩토리">
+<meta property="og:title" content="Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수">
 <meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/index.html">
 <meta property="og:site_name" content="Today I Learned">
 <meta property="og:description" content="logging 패키지에는 어떤 Log Record 클래스를 사용할 지 정하기 위한 팩토리 함수들이 총 3개 있다. 우선 Default는 원래 LogRecord 클래스로 지정되어있다. 1_logRecordFactory = LogRecord setLogRecordFactory로그 레코드를 초기화할 때 사용되는 로그 레코드 팩토리를 정하는 함수. 글로벌 변수 _">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-08T01:01:24.142Z">
+<meta property="og:updated_time" content="2018-12-13T16:44:03.214Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python Logging 파헤치기 - LogRecord 클래스 팩토리">
+<meta name="twitter:title" content="Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수">
 <meta name="twitter:description" content="logging 패키지에는 어떤 Log Record 클래스를 사용할 지 정하기 위한 팩토리 함수들이 총 3개 있다. 우선 Default는 원래 LogRecord 클래스로 지정되어있다. 1_logRecordFactory = LogRecord setLogRecordFactory로그 레코드를 초기화할 때 사용되는 로그 레코드 팩토리를 정하는 함수. 글로벌 변수 _">
     
     
@@ -36,7 +36,7 @@
         
     
     <!-- title -->
-    <title>Python Logging 파헤치기 - LogRecord 클래스 팩토리</title>
+    <title>Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수</title>
     <!-- styles -->
     <link rel="stylesheet" href="/TIL/css/style.css">
     <!-- persian styles -->
@@ -68,6 +68,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/TIL/2018/12/12/python_log_formatter/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/TIL/2018/12/02/python_logrecord/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -83,15 +85,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&text=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&is_video=false&description=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - LogRecord 클래스 팩토리&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&name=Python Logging 파헤치기 - LogRecord 클래스 팩토리&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&text=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&is_video=false&description=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&name=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -108,7 +110,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Python Logging 파헤치기 - LogRecord 클래스 팩토리
+        Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수
     </h1>
 
 
@@ -172,15 +174,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&text=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&is_video=false&description=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - LogRecord 클래스 팩토리&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&name=Python Logging 파헤치기 - LogRecord 클래스 팩토리&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&text=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&is_video=false&description=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&title=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/06/python_logrecord_factory/&name=Python Logging 파헤치기 - LogRecord 클래스 팩토리 함수&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
