@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="최근 PyCon에서 스프린트가 열리는 것을 보았고, 내일 Django 스프린트에 참석할 예정이라 스프린트가 무엇인지 간단히 조사해보았다. 스프린트의 어원은 “전력 질주”이다. 제품 개발, 디자인 등 여러 분야에서 “스프린트”라는 단어를 많이 사용한다. 오픈소스 (개발) 분야에서는 스프린트를 “같은 장소에 관심있는 사람들이 모여 한 오픈소스 프로젝트에 기여하">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(오픈소스) 스프린트">
+<meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/12/15/sprint/index.html">
+<meta property="og:site_name" content="Today I Learned">
+<meta property="og:description" content="최근 PyCon에서 스프린트가 열리는 것을 보았고, 내일 Django 스프린트에 참석할 예정이라 스프린트가 무엇인지 간단히 조사해보았다. 스프린트의 어원은 “전력 질주”이다. 제품 개발, 디자인 등 여러 분야에서 “스프린트”라는 단어를 많이 사용한다. 오픈소스 (개발) 분야에서는 스프린트를 “같은 장소에 관심있는 사람들이 모여 한 오픈소스 프로젝트에 기여하">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-15T17:31:20.350Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="(오픈소스) 스프린트">
+<meta name="twitter:description" content="최근 PyCon에서 스프린트가 열리는 것을 보았고, 내일 Django 스프린트에 참석할 예정이라 스프린트가 무엇인지 간단히 조사해보았다. 스프린트의 어원은 “전력 질주”이다. 제품 개발, 디자인 등 여러 분야에서 “스프린트”라는 단어를 많이 사용한다. 오픈소스 (개발) 분야에서는 스프린트를 “같은 장소에 관심있는 사람들이 모여 한 오픈소스 프로젝트에 기여하">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/TIL/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/TIL/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/TIL/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>(오픈소스) 스프린트</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/TIL/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/TIL/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/TIL/2018/12/12/python_log_formatter/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/12/15/sprint/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&text=(오픈소스) 스프린트"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&title=(오픈소스) 스프린트"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&is_video=false&description=(오픈소스) 스프린트"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=(오픈소스) 스프린트&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/15/sprint/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&title=(오픈소스) 스프린트"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&title=(오픈소스) 스프린트"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&title=(오픈소스) 스프린트"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&title=(오픈소스) 스프린트"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&name=(오픈소스) 스프린트&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Links"><span class="toc-number">1.</span> <span class="toc-text">Links</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        (오픈소스) 스프린트
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Today I Learned</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-12-14T15:00:00.000Z" itemprop="datePublished">2018-12-15</time>
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/TIL/categories/development/">development</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>최근 PyCon에서 스프린트가 열리는 것을 보았고, 내일 Django 스프린트에 참석할 예정이라 스프린트가 무엇인지 간단히 조사해보았다.</p>
+<p>스프린트의 어원은 “전력 질주”이다. 제품 개발, 디자인 등 여러 분야에서 “스프린트”라는 단어를 많이 사용한다.</p>
+<p>오픈소스 (개발) 분야에서는 스프린트를 “같은 장소에 관심있는 사람들이 모여 한 오픈소스 프로젝트에 기여하는 모임” 정도의 의미로 공감하고 있는 것 같다.</p>
+<p>보통 코어 개발자가 참석하여 모두가 기여할 수 있도록 도움을 준다고 한다.</p>
+<h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><ul>
+<li><a href="https://blog.pycon.kr/2017/07/11/tutorial-and-sprint/?fbclid=IwAR21siUjH7xyAanDmxg3DAIB9x_Wcmle32bj_8e-etgNBFoOyhk-igZ4Nm0" target="_blank" rel="noopener">파이콘 한국 2017을 즐기는 방법: 02. 스프린트 튜토리얼의 대장이 되어보자.</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Links"><span class="toc-number">1.</span> <span class="toc-text">Links</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/12/15/sprint/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&text=(오픈소스) 스프린트"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&title=(오픈소스) 스프린트"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&is_video=false&description=(오픈소스) 스프린트"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=(오픈소스) 스프린트&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/15/sprint/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&title=(오픈소스) 스프린트"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&title=(오픈소스) 스프린트"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&title=(오픈소스) 스프린트"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&title=(오픈소스) 스프린트"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/15/sprint/&name=(오픈소스) 스프린트&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 HyunTae Hwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/TIL/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/TIL/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/TIL/lib/jquery/jquery.min.js"></script>
+<script src="/TIL/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/TIL/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
