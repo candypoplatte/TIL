@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Redis 사용 시, key에 data를 저장할 때 SET 커맨드를 사용한다. NX 옵션 : 키가 존재하지 않을 때만 SET이 가능하게 한다. 123456789101112127.0.0.1:6379&amp;gt; SET k1 v1OK127.0.0.1:6379&amp;gt; GET k1&quot;v1&quot;127.0.0.1:6379&amp;gt; SET k1 v2OK127.0.0.1:6379&amp;g">
+    <meta name="description" content="Redis 사용 시, key에 data를 저장할 때 SET 커맨드를 사용한다. NX 옵션 : 키가 존재하지 않을 때만 SET이 가능하게 한다. 123456789101112131415161718127.0.0.1:6379&amp;gt; SET k1 v1OK127.0.0.1:6379&amp;gt; GET k1&quot;v1&quot;127.0.0.1:6379&amp;gt; SET k1 v2OK127.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis SET 커맨드의 NX 옵션">
 <meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/12/21/higher_order_function.1/index.html">
 <meta property="og:site_name" content="Today I Learned">
-<meta property="og:description" content="Redis 사용 시, key에 data를 저장할 때 SET 커맨드를 사용한다. NX 옵션 : 키가 존재하지 않을 때만 SET이 가능하게 한다. 123456789101112127.0.0.1:6379&amp;gt; SET k1 v1OK127.0.0.1:6379&amp;gt; GET k1&quot;v1&quot;127.0.0.1:6379&amp;gt; SET k1 v2OK127.0.0.1:6379&amp;g">
+<meta property="og:description" content="Redis 사용 시, key에 data를 저장할 때 SET 커맨드를 사용한다. NX 옵션 : 키가 존재하지 않을 때만 SET이 가능하게 한다. 123456789101112131415161718127.0.0.1:6379&amp;gt; SET k1 v1OK127.0.0.1:6379&amp;gt; GET k1&quot;v1&quot;127.0.0.1:6379&amp;gt; SET k1 v2OK127.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-22T20:07:21.402Z">
+<meta property="og:updated_time" content="2018-12-22T20:08:01.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis SET 커맨드의 NX 옵션">
-<meta name="twitter:description" content="Redis 사용 시, key에 data를 저장할 때 SET 커맨드를 사용한다. NX 옵션 : 키가 존재하지 않을 때만 SET이 가능하게 한다. 123456789101112127.0.0.1:6379&amp;gt; SET k1 v1OK127.0.0.1:6379&amp;gt; GET k1&quot;v1&quot;127.0.0.1:6379&amp;gt; SET k1 v2OK127.0.0.1:6379&amp;g">
+<meta name="twitter:description" content="Redis 사용 시, key에 data를 저장할 때 SET 커맨드를 사용한다. NX 옵션 : 키가 존재하지 않을 때만 SET이 가능하게 한다. 123456789101112131415161718127.0.0.1:6379&amp;gt; SET k1 v1OK127.0.0.1:6379&amp;gt; GET k1&quot;v1&quot;127.0.0.1:6379&amp;gt; SET k1 v2OK127.">
     
     
         
@@ -141,7 +141,7 @@
   <div class="content" itemprop="articleBody">
     <p>Redis 사용 시, key에 data를 저장할 때 SET 커맨드를 사용한다.</p>
 <p>NX 옵션 : 키가 존재하지 않을 때만 SET이 가능하게 한다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SET k1 v1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; GET k1</span><br><span class="line"><span class="string">"v1"</span></span><br><span class="line">127.0.0.1:6379&gt; SET k1 v2</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; GET k1</span><br><span class="line"><span class="string">"v2"</span></span><br><span class="line">127.0.0.1:6379&gt; SET k1 v3 NX</span><br><span class="line">(nil)</span><br><span class="line">127.0.0.1:6379&gt; GET k1</span><br><span class="line"><span class="string">"v2"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SET k1 v1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; GET k1</span><br><span class="line"><span class="string">"v1"</span></span><br><span class="line">127.0.0.1:6379&gt; SET k1 v2</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; GET k1</span><br><span class="line"><span class="string">"v2"</span></span><br><span class="line">127.0.0.1:6379&gt; SET k1 v3 NX</span><br><span class="line">(nil)</span><br><span class="line">127.0.0.1:6379&gt; GET k1</span><br><span class="line"><span class="string">"v2"</span></span><br><span class="line">127.0.0.1:6379&gt; DEL k1</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; SET k1 v3 NX</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; GET k1</span><br><span class="line"><span class="string">"v3"</span></span><br></pre></td></tr></table></figure>
   </div>
 </article>
 
