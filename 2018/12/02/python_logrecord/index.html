@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="파이썬 로깅 패키지의 init.py 파일에서 제일 처음 선언되는 클래스는 LogRecord다. LogRecord?LogRecord 인스턴스는 로깅된 이벤트를 나타낸다. 무언가가 로깅될 때마다 생성되며, 로깅되는 이벤트와 관련된 모든 정보를 담고있다. 전달되는 주요 정보는 msg와 args이며, str(msg) % args를 통해 Record의 message">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python Logging 파헤치기 - LogRecord 클래스">
+<meta property="og:title" content="Python Logging - LogRecord 클래스">
 <meta property="og:url" content="https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/index.html">
 <meta property="og:site_name" content="Today I Learned">
 <meta property="og:description" content="파이썬 로깅 패키지의 init.py 파일에서 제일 처음 선언되는 클래스는 LogRecord다. LogRecord?LogRecord 인스턴스는 로깅된 이벤트를 나타낸다. 무언가가 로깅될 때마다 생성되며, 로깅되는 이벤트와 관련된 모든 정보를 담고있다. 전달되는 주요 정보는 msg와 args이며, str(msg) % args를 통해 Record의 message">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-02T17:47:49.313Z">
+<meta property="og:updated_time" content="2018-12-22T19:52:49.083Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python Logging 파헤치기 - LogRecord 클래스">
+<meta name="twitter:title" content="Python Logging - LogRecord 클래스">
 <meta name="twitter:description" content="파이썬 로깅 패키지의 init.py 파일에서 제일 처음 선언되는 클래스는 LogRecord다. LogRecord?LogRecord 인스턴스는 로깅된 이벤트를 나타낸다. 무언가가 로깅될 때마다 생성되며, 로깅되는 이벤트와 관련된 모든 정보를 담고있다. 전달되는 주요 정보는 msg와 args이며, str(msg) % args를 통해 Record의 message">
     
     
@@ -36,7 +36,7 @@
         
     
     <!-- title -->
-    <title>Python Logging 파헤치기 - LogRecord 클래스</title>
+    <title>Python Logging - LogRecord 클래스</title>
     <!-- styles -->
     <link rel="stylesheet" href="/TIL/css/style.css">
     <!-- persian styles -->
@@ -85,15 +85,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&text=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&is_video=false&description=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - LogRecord 클래스&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&name=Python Logging 파헤치기 - LogRecord 클래스&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&text=Python Logging - LogRecord 클래스"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging - LogRecord 클래스"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&is_video=false&description=Python Logging - LogRecord 클래스"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging - LogRecord 클래스&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging - LogRecord 클래스"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging - LogRecord 클래스"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging - LogRecord 클래스"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging - LogRecord 클래스"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&name=Python Logging - LogRecord 클래스&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -110,7 +110,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Python Logging 파헤치기 - LogRecord 클래스
+        Python Logging - LogRecord 클래스
     </h1>
 
 
@@ -191,15 +191,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&text=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&is_video=false&description=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python Logging 파헤치기 - LogRecord 클래스&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging 파헤치기 - LogRecord 클래스"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&name=Python Logging 파헤치기 - LogRecord 클래스&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&text=Python Logging - LogRecord 클래스"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging - LogRecord 클래스"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&is_video=false&description=Python Logging - LogRecord 클래스"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python Logging - LogRecord 클래스&body=Check out this article: https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging - LogRecord 클래스"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging - LogRecord 클래스"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging - LogRecord 클래스"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&title=Python Logging - LogRecord 클래스"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2018/12/02/python_logrecord/&name=Python Logging - LogRecord 클래스&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
