@@ -1,5 +1,5 @@
 ---
-title: Python Logging 파헤치기 - LogRecord 클래스
+title: Python Logging - LogRecord 클래스
 date: 2018-12-02
 categories:
   - development

@@ -1,5 +1,5 @@
 ---
-title: Python Logging 파헤치기 - getLogger 함수는 오직 한 인스턴스만 반환
+title: Python Logging - getLogger 함수는 오직 한 인스턴스만 반환
 date: 2018-11-19
 categories:
   - development
