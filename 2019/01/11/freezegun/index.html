@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="timezone.now()와 같이 현재 시간을 사용하는 파이썬 코드를 시간을 바꿔가면서 테스트하고 싶을 때가 있다. 이 때 사용하면 좋은 라이브러리가 바로 FreezeGun. 데코레이터 등의 형태로 사용할 수 있다. 예시1234@freeze_time(&quot;1955-11-12&quot;)class MyTests(unittest.TestCase):    def test_t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="시간을 테스트할 때는 FreezeGun">
+<meta property="og:url" content="https://candypoplatte.github.io/TIL/2019/01/11/freezegun/index.html">
+<meta property="og:site_name" content="Today I Learned">
+<meta property="og:description" content="timezone.now()와 같이 현재 시간을 사용하는 파이썬 코드를 시간을 바꿔가면서 테스트하고 싶을 때가 있다. 이 때 사용하면 좋은 라이브러리가 바로 FreezeGun. 데코레이터 등의 형태로 사용할 수 있다. 예시1234@freeze_time(&quot;1955-11-12&quot;)class MyTests(unittest.TestCase):    def test_t">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-12T14:05:45.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="시간을 테스트할 때는 FreezeGun">
+<meta name="twitter:description" content="timezone.now()와 같이 현재 시간을 사용하는 파이썬 코드를 시간을 바꿔가면서 테스트하고 싶을 때가 있다. 이 때 사용하면 좋은 라이브러리가 바로 FreezeGun. 데코레이터 등의 형태로 사용할 수 있다. 예시1234@freeze_time(&quot;1955-11-12&quot;)class MyTests(unittest.TestCase):    def test_t">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/TIL/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/TIL/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/TIL/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>시간을 테스트할 때는 FreezeGun</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/TIL/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/TIL/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/TIL/2019/01/01/cs231n_kor_sub/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&text=시간을 테스트할 때는 FreezeGun"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&title=시간을 테스트할 때는 FreezeGun"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&is_video=false&description=시간을 테스트할 때는 FreezeGun"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=시간을 테스트할 때는 FreezeGun&body=Check out this article: https://candypoplatte.github.io/TIL/2019/01/11/freezegun/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&title=시간을 테스트할 때는 FreezeGun"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&title=시간을 테스트할 때는 FreezeGun"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&title=시간을 테스트할 때는 FreezeGun"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&title=시간을 테스트할 때는 FreezeGun"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&name=시간을 테스트할 때는 FreezeGun&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#예시"><span class="toc-number">1.</span> <span class="toc-text">예시</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#주의-Default-arguments"><span class="toc-number">2.</span> <span class="toc-text">주의 : Default arguments</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Links"><span class="toc-number">3.</span> <span class="toc-text">Links</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        시간을 테스트할 때는 FreezeGun
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Today I Learned</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-01-10T15:00:00.000Z" itemprop="datePublished">2019-01-11</time>
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/TIL/categories/development/">development</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><code>timezone.now()</code>와 같이 현재 시간을 사용하는 파이썬 코드를 시간을 바꿔가면서 테스트하고 싶을 때가 있다.</p>
+<p>이 때 사용하면 좋은 라이브러리가 바로 FreezeGun.</p>
+<p>데코레이터 등의 형태로 사용할 수 있다.</p>
+<h2 id="예시"><a href="#예시" class="headerlink" title="예시"></a>예시</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@freeze_time("1955-11-12")</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTests</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_the_class</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">assert</span> datetime.datetime.now() == datetime.datetime(<span class="number">1955</span>, <span class="number">11</span>, <span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="주의-Default-arguments"><a href="#주의-Default-arguments" class="headerlink" title="주의 : Default arguments"></a>주의 : Default arguments</h2><p>FreezeGun은 Default Argument를 수정하지는 않는다.</p>
+<h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><ul>
+<li><a href="https://github.com/spulec/freezegun" target="_blank" rel="noopener">https://github.com/spulec/freezegun</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#예시"><span class="toc-number">1.</span> <span class="toc-text">예시</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#주의-Default-arguments"><span class="toc-number">2.</span> <span class="toc-text">주의 : Default arguments</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Links"><span class="toc-number">3.</span> <span class="toc-text">Links</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&text=시간을 테스트할 때는 FreezeGun"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&title=시간을 테스트할 때는 FreezeGun"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&is_video=false&description=시간을 테스트할 때는 FreezeGun"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=시간을 테스트할 때는 FreezeGun&body=Check out this article: https://candypoplatte.github.io/TIL/2019/01/11/freezegun/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&title=시간을 테스트할 때는 FreezeGun"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&title=시간을 테스트할 때는 FreezeGun"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&title=시간을 테스트할 때는 FreezeGun"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&title=시간을 테스트할 때는 FreezeGun"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2019/01/11/freezegun/&name=시간을 테스트할 때는 FreezeGun&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 HyunTae Hwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/TIL/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/TIL/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/TIL/lib/jquery/jquery.min.js"></script>
+<script src="/TIL/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/TIL/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
