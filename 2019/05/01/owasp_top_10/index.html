@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="웹 애플리케이션에서 주의해야 할 보안 위험 10가지 Open Web Application Security Project(이하 OWASP)에서 정리했다 2017년에 정리된 내용이 마지막인 듯 하다 하나 씩 찾아봐야지 Top 10 인젝션 취약한 인증 민감한 데이터 노출 XML 외부 개체 (XXE) 취약한 접근 통제 잘못된 보안 구성 크로스 사이트 스크립팅 (X">
+    <meta name="description" content="웹 애플리케이션에서 주의해야 할 보안 위험 10가지 Open Web Application Security Project(이하 OWASP)에서 정리했고, 2017년에 정리된 내용이 마지막인 듯 하다. 한국어 PDF 보기 Top 10 인젝션 취약한 인증 민감한 데이터 노출 XML 외부 개체 (XXE) 취약한 접근 통제 잘못된 보안 구성 크로스 사이트 스크립팅">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OWASP Top 10">
 <meta property="og:url" content="https://candypoplatte.github.io/TIL/2019/05/01/owasp_top_10/index.html">
 <meta property="og:site_name" content="Today I Learned">
-<meta property="og:description" content="웹 애플리케이션에서 주의해야 할 보안 위험 10가지 Open Web Application Security Project(이하 OWASP)에서 정리했다 2017년에 정리된 내용이 마지막인 듯 하다 하나 씩 찾아봐야지 Top 10 인젝션 취약한 인증 민감한 데이터 노출 XML 외부 개체 (XXE) 취약한 접근 통제 잘못된 보안 구성 크로스 사이트 스크립팅 (X">
+<meta property="og:description" content="웹 애플리케이션에서 주의해야 할 보안 위험 10가지 Open Web Application Security Project(이하 OWASP)에서 정리했고, 2017년에 정리된 내용이 마지막인 듯 하다. 한국어 PDF 보기 Top 10 인젝션 취약한 인증 민감한 데이터 노출 XML 외부 개체 (XXE) 취약한 접근 통제 잘못된 보안 구성 크로스 사이트 스크립팅">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-01T16:15:09.296Z">
+<meta property="og:updated_time" content="2019-05-01T16:17:12.251Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OWASP Top 10">
-<meta name="twitter:description" content="웹 애플리케이션에서 주의해야 할 보안 위험 10가지 Open Web Application Security Project(이하 OWASP)에서 정리했다 2017년에 정리된 내용이 마지막인 듯 하다 하나 씩 찾아봐야지 Top 10 인젝션 취약한 인증 민감한 데이터 노출 XML 외부 개체 (XXE) 취약한 접근 통제 잘못된 보안 구성 크로스 사이트 스크립팅 (X">
+<meta name="twitter:description" content="웹 애플리케이션에서 주의해야 할 보안 위험 10가지 Open Web Application Security Project(이하 OWASP)에서 정리했고, 2017년에 정리된 내용이 마지막인 듯 하다. 한국어 PDF 보기 Top 10 인젝션 취약한 인증 민감한 데이터 노출 XML 외부 개체 (XXE) 취약한 접근 통제 잘못된 보안 구성 크로스 사이트 스크립팅">
     
     
         
@@ -69,7 +69,7 @@
       <ul>
         
         
-        <li><a class="icon" href="/TIL/2019/02/04/dns_resolver/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/TIL/2019/05/01/microsvc_chap_9/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -96,7 +96,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Top-10"><span class="toc-number">1.</span> <span class="toc-text">Top 10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#자료"><span class="toc-number">2.</span> <span class="toc-text">자료</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Top-10"><span class="toc-number">1.</span> <span class="toc-text">Top 10</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -133,9 +133,8 @@
 
   <div class="content" itemprop="articleBody">
     <p>웹 애플리케이션에서 주의해야 할 보안 위험 10가지</p>
-<p>Open Web Application Security Project(이하 OWASP)에서 정리했다</p>
-<p>2017년에 정리된 내용이 마지막인 듯 하다</p>
-<p>하나 씩 찾아봐야지</p>
+<p>Open Web Application Security Project(이하 OWASP)에서 정리했고, 2017년에 정리된 내용이 마지막인 듯 하다.</p>
+<p><a href="https://www.owasp.org/images/b/bd/OWASP_Top_10-2017-ko.pdf" target="_blank" rel="noopener">한국어 PDF 보기</a></p>
 <h2 id="Top-10"><a href="#Top-10" class="headerlink" title="Top 10"></a>Top 10</h2><ol>
 <li>인젝션</li>
 <li>취약한 인증</li>
@@ -148,7 +147,6 @@
 <li>알려진 취약점이 있는 구성요소 사용</li>
 <li>불충분한 로깅 및 모니터링</li>
 </ol>
-<h2 id="자료"><a href="#자료" class="headerlink" title="자료"></a>자료</h2><p><a href="https://www.owasp.org/images/b/bd/OWASP_Top_10-2017-ko.pdf" target="_blank" rel="noopener">한국어 PDF</a></p>
 
   </div>
 </article>
@@ -170,7 +168,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Top-10"><span class="toc-number">1.</span> <span class="toc-text">Top 10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#자료"><span class="toc-number">2.</span> <span class="toc-text">자료</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Top-10"><span class="toc-number">1.</span> <span class="toc-text">Top 10</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
