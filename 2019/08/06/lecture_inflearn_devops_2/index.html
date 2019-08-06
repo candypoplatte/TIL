@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="인프런의 DevOps &amp;amp; Docker 강의의 2/3 부분. Docker에 대해 간략히 설명한다. Docker의 특징Linux Container(LXC) 기반 Virtual Machine과는 다름 Host OS의 커널을 공유함 부팅 과정이 없다 도커 이미지를 메모리에 올리면 -&amp;gt; 부팅이 된 것이나 마찬가지  cgroup : Control Grou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="강의 - DevOps의 이해 및 Docker Hands-on (2&#x2F;3)">
+<meta property="og:url" content="https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/index.html">
+<meta property="og:site_name" content="Today I Learned">
+<meta property="og:description" content="인프런의 DevOps &amp;amp; Docker 강의의 2/3 부분. Docker에 대해 간략히 설명한다. Docker의 특징Linux Container(LXC) 기반 Virtual Machine과는 다름 Host OS의 커널을 공유함 부팅 과정이 없다 도커 이미지를 메모리에 올리면 -&amp;gt; 부팅이 된 것이나 마찬가지  cgroup : Control Grou">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-06T14:12:39.674Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="강의 - DevOps의 이해 및 Docker Hands-on (2&#x2F;3)">
+<meta name="twitter:description" content="인프런의 DevOps &amp;amp; Docker 강의의 2/3 부분. Docker에 대해 간략히 설명한다. Docker의 특징Linux Container(LXC) 기반 Virtual Machine과는 다름 Host OS의 커널을 공유함 부팅 과정이 없다 도커 이미지를 메모리에 올리면 -&amp;gt; 부팅이 된 것이나 마찬가지  cgroup : Control Grou">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/TIL/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/TIL/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/TIL/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>강의 - DevOps의 이해 및 Docker Hands-on (2/3)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/TIL/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/TIL/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/TIL/2019/08/06/lecture_inflearn_devops_1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/TIL/2019/06/08/udacity_cs253_lesson4/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&text=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&title=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&is_video=false&description=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=강의 - DevOps의 이해 및 Docker Hands-on (2/3)&body=Check out this article: https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&title=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&title=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&title=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&title=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&name=강의 - DevOps의 이해 및 Docker Hands-on (2/3)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker의-특징"><span class="toc-number">1.</span> <span class="toc-text">Docker의 특징</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-Container-LXC-기반"><span class="toc-number">1.1.</span> <span class="toc-text">Linux Container(LXC) 기반</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cgroup-Control-Group"><span class="toc-number">1.2.</span> <span class="toc-text">cgroup : Control Group</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Hub"><span class="toc-number">1.3.</span> <span class="toc-text">Docker Hub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aufs"><span class="toc-number">1.4.</span> <span class="toc-text">aufs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Device-mapper"><span class="toc-number">1.5.</span> <span class="toc-text">Device-mapper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#버전-표기-방식"><span class="toc-number">1.6.</span> <span class="toc-text">버전 표기 방식</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#마무리"><span class="toc-number">2.</span> <span class="toc-text">마무리</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        강의 - DevOps의 이해 및 Docker Hands-on (2/3)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Today I Learned</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-08-05T15:00:00.000Z" itemprop="datePublished">2019-08-06</time>
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/TIL/categories/development/">development</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>인프런의 DevOps &amp; Docker 강의의 2/3 부분. Docker에 대해 간략히 설명한다.</p>
+<h2 id="Docker의-특징"><a href="#Docker의-특징" class="headerlink" title="Docker의 특징"></a>Docker의 특징</h2><h3 id="Linux-Container-LXC-기반"><a href="#Linux-Container-LXC-기반" class="headerlink" title="Linux Container(LXC) 기반"></a>Linux Container(LXC) 기반</h3><ul>
+<li>Virtual Machine과는 다름</li>
+<li>Host OS의 커널을 공유함</li>
+<li>부팅 과정이 없다</li>
+<li>도커 이미지를 메모리에 올리면 -&gt; 부팅이 된 것이나 마찬가지</li>
+</ul>
+<h3 id="cgroup-Control-Group"><a href="#cgroup-Control-Group" class="headerlink" title="cgroup : Control Group"></a>cgroup : Control Group</h3><ul>
+<li>프로세스 격리 방식</li>
+<li>나중에 찾아보자</li>
+</ul>
+<h3 id="Docker-Hub"><a href="#Docker-Hub" class="headerlink" title="Docker Hub"></a>Docker Hub</h3><ul>
+<li>LXC와는 달리 만들어놓은 이미지를 공유 -&gt; Boom</li>
+</ul>
+<h3 id="aufs"><a href="#aufs" class="headerlink" title="aufs"></a>aufs</h3><ul>
+<li>적층형 이미지</li>
+<li>Base +&gt; 소스a +&gt; 소스b</li>
+<li>버전 변경 시 차이나는 부분만 있으면 됨. 이미 있는 부분은 받지 않음</li>
+<li>저장소 관리 효율 &amp; 네트워크 절약</li>
+<li>나중에 찾아보자</li>
+</ul>
+<h3 id="Device-mapper"><a href="#Device-mapper" class="headerlink" title="Device-mapper"></a>Device-mapper</h3><ul>
+<li>볼륨 관리 기술</li>
+<li>Ubuntu 특화</li>
+<li>나중에 찾아보자</li>
+</ul>
+<h3 id="버전-표기-방식"><a href="#버전-표기-방식" class="headerlink" title="버전 표기 방식"></a>버전 표기 방식</h3><ul>
+<li>연도.월</li>
+<li>ex) 18.03</li>
+</ul>
+<h2 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h2><p><strong>Docker는 LXC를 쓰기 편하게 만든 것!</strong></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker의-특징"><span class="toc-number">1.</span> <span class="toc-text">Docker의 특징</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-Container-LXC-기반"><span class="toc-number">1.1.</span> <span class="toc-text">Linux Container(LXC) 기반</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cgroup-Control-Group"><span class="toc-number">1.2.</span> <span class="toc-text">cgroup : Control Group</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Hub"><span class="toc-number">1.3.</span> <span class="toc-text">Docker Hub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aufs"><span class="toc-number">1.4.</span> <span class="toc-text">aufs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Device-mapper"><span class="toc-number">1.5.</span> <span class="toc-text">Device-mapper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#버전-표기-방식"><span class="toc-number">1.6.</span> <span class="toc-text">버전 표기 방식</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#마무리"><span class="toc-number">2.</span> <span class="toc-text">마무리</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&text=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&title=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&is_video=false&description=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=강의 - DevOps의 이해 및 Docker Hands-on (2/3)&body=Check out this article: https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&title=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&title=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&title=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&title=강의 - DevOps의 이해 및 Docker Hands-on (2/3)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_2/&name=강의 - DevOps의 이해 및 Docker Hands-on (2/3)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 HyunTae Hwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/TIL/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/TIL/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/TIL/lib/jquery/jquery.min.js"></script>
+<script src="/TIL/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/TIL/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-112450381-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'candypoplatte';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

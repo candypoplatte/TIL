@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="인프런의 DevOps &amp;amp; Docker 강의. 1/3 부분에서는 DevOps가 뭔지, 왜 해야하는지 알려준다. DevOps?개발(Dev)과 운영(Ops)의 중간 영역 : “개발 쪽에서 하기도 애매하고… 운영 쪽에서 하기도 애매한 영역”  개발 환경 세팅 서비스 모니터링, 로그 수집/분석 소스코드 관리, 빌드 테스트, 배포  → 보통 개발자들이 해 옴">
+<meta property="og:type" content="article">
+<meta property="og:title" content="강의 - DevOps의 이해 및 Docker Hands-on (1&#x2F;3)">
+<meta property="og:url" content="https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/index.html">
+<meta property="og:site_name" content="Today I Learned">
+<meta property="og:description" content="인프런의 DevOps &amp;amp; Docker 강의. 1/3 부분에서는 DevOps가 뭔지, 왜 해야하는지 알려준다. DevOps?개발(Dev)과 운영(Ops)의 중간 영역 : “개발 쪽에서 하기도 애매하고… 운영 쪽에서 하기도 애매한 영역”  개발 환경 세팅 서비스 모니터링, 로그 수집/분석 소스코드 관리, 빌드 테스트, 배포  → 보통 개발자들이 해 옴">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-06T14:12:27.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="강의 - DevOps의 이해 및 Docker Hands-on (1&#x2F;3)">
+<meta name="twitter:description" content="인프런의 DevOps &amp;amp; Docker 강의. 1/3 부분에서는 DevOps가 뭔지, 왜 해야하는지 알려준다. DevOps?개발(Dev)과 운영(Ops)의 중간 영역 : “개발 쪽에서 하기도 애매하고… 운영 쪽에서 하기도 애매한 영역”  개발 환경 세팅 서비스 모니터링, 로그 수집/분석 소스코드 관리, 빌드 테스트, 배포  → 보통 개발자들이 해 옴">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/TIL/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/TIL/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/TIL/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>강의 - DevOps의 이해 및 Docker Hands-on (1/3)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/TIL/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/TIL/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/TIL/2019/08/06/lecture_inflearn_devops_2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&text=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&title=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&is_video=false&description=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=강의 - DevOps의 이해 및 Docker Hands-on (1/3)&body=Check out this article: https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&title=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&title=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&title=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&title=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&name=강의 - DevOps의 이해 및 Docker Hands-on (1/3)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DevOps"><span class="toc-number">1.</span> <span class="toc-text">DevOps?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DevOps-Process"><span class="toc-number">2.</span> <span class="toc-text">DevOps Process</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DevOps-Culture"><span class="toc-number">3.</span> <span class="toc-text">DevOps Culture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#전문가"><span class="toc-number">4.</span> <span class="toc-text">전문가</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DevOps-Engineering-VS-SRE"><span class="toc-number">5.</span> <span class="toc-text">DevOps Engineering VS SRE</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        강의 - DevOps의 이해 및 Docker Hands-on (1/3)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Today I Learned</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-08-05T15:00:00.000Z" itemprop="datePublished">2019-08-06</time>
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/TIL/categories/development/">development</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>인프런의 DevOps &amp; Docker 강의. 1/3 부분에서는 DevOps가 뭔지, 왜 해야하는지 알려준다.</p>
+<h2 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps?"></a>DevOps?</h2><p>개발(Dev)과 운영(Ops)의 중간 영역 : “개발 쪽에서 하기도 애매하고… 운영 쪽에서 하기도 애매한 영역”</p>
+<ul>
+<li>개발 환경 세팅</li>
+<li>서비스 모니터링, 로그 수집/분석</li>
+<li>소스코드 관리, 빌드</li>
+<li>테스트, 배포</li>
+</ul>
+<p>→ 보통 개발자들이 해 옴 (잘하는 개발자 1명이 다 함)<br>→ 클라우드 인프라의 등장 : 운영 쪽에서 할 일이 더 줄어듬</p>
+<h2 id="DevOps-Process"><a href="#DevOps-Process" class="headerlink" title="DevOps Process"></a>DevOps Process</h2><p>Plan, Design, Dev, Review, Build, Test. Deploy 등 일련의 과정</p>
+<h2 id="DevOps-Culture"><a href="#DevOps-Culture" class="headerlink" title="DevOps Culture"></a>DevOps Culture</h2><p>소통, 협업, 투명성, 비난하지 않기 등<br>“DevOps는 문화다”</p>
+<h2 id="전문가"><a href="#전문가" class="headerlink" title="전문가"></a>전문가</h2><p>Evangelist, Specialist, Engineer<br>전문가가 틀을 잡고 나면 (프로세스 세팅, 문화 세팅 등. 회사 전체에 DevOps를 심는 것)<br> → 이제 DevOps Engineering / SRE를 할 수 있다!</p>
+<h2 id="DevOps-Engineering-VS-SRE"><a href="#DevOps-Engineering-VS-SRE" class="headerlink" title="DevOps Engineering VS SRE"></a>DevOps Engineering VS SRE</h2><p>목적, 관점이 다름!</p>
+<ul>
+<li>DevOps Engineering : 운영 관점에서의 자동화</li>
+<li>SRE : 서비스 품질, 성능 향상 관점에서의 자동화</li>
+</ul>
+<p><strong>Product Engineer ≠ DevOps Engineer ≠ Dev+Ops</strong></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DevOps"><span class="toc-number">1.</span> <span class="toc-text">DevOps?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DevOps-Process"><span class="toc-number">2.</span> <span class="toc-text">DevOps Process</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DevOps-Culture"><span class="toc-number">3.</span> <span class="toc-text">DevOps Culture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#전문가"><span class="toc-number">4.</span> <span class="toc-text">전문가</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DevOps-Engineering-VS-SRE"><span class="toc-number">5.</span> <span class="toc-text">DevOps Engineering VS SRE</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&text=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&title=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&is_video=false&description=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=강의 - DevOps의 이해 및 Docker Hands-on (1/3)&body=Check out this article: https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&title=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&title=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&title=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&title=강의 - DevOps의 이해 및 Docker Hands-on (1/3)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://candypoplatte.github.io/TIL/2019/08/06/lecture_inflearn_devops_1/&name=강의 - DevOps의 이해 및 Docker Hands-on (1/3)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 HyunTae Hwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="https://candypoplatte.github.io/">Blog</a></li>
+         
+          <li><a href="/TIL/">TIL</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/TIL/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/TIL/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/TIL/lib/jquery/jquery.min.js"></script>
+<script src="/TIL/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/TIL/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-112450381-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'candypoplatte';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
